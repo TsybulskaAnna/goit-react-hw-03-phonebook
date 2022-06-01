@@ -7,19 +7,6 @@ export class FormContact extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  inputName(name) {
-    const contacts = this.props.contacts;
-    if (
-      contacts.some(
-        contact => contact.name.toLowerCase() === name.toLowerCase()
-      )
-    ) {
-      alert('This contact name already exists!');
-      return true;
-    }
-    return false;
-  }
-
   resetForm() {
     this.setState({ name: '', number: '' });
   }
@@ -29,7 +16,6 @@ export class FormContact extends Component {
     const number = e.target.number.value;
     e.preventDefault();
 
-    if (this.inputName(name)) return;
     this.props.addContact(name, number);
     this.resetForm();
   };
