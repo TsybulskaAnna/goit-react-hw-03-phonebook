@@ -34,18 +34,36 @@ export class App extends Component {
       localStorage.setItem('contacts', JSON.stringify(contacts));
     }
   }
-  inputName(name) {
-    const contacts = this.props.contacts;
+
+
+
+
+  addContact = (name, number) => {
+    const {contacts} = this.state;
     if (
       contacts.some(
         contact => contact.name.toLowerCase() === name.toLowerCase()
       )
     ) {
-      alert('This contact name already exists!');
-      return true;
+      alert(`This contact ${name} already exists!`);
+      return;
     }
-    return false;
-  }
+    this.setState(prev => ({
+      contacts: [
+        ...prev.contacts,
+        {
+          name,
+          number,
+          id: nanoid(),
+        },
+      ],
+    }));
+  }; 
+
+
+
+
+
 
   filterContacts() {
     const { filter, contacts } = this.state;
@@ -57,19 +75,6 @@ export class App extends Component {
     }
     return contacts;
   }
-
-  addContact = (name, number) => {
-    this.setState(prev => ({
-      contacts: [
-        ...prev.contacts,
-        {
-          name,
-          number,
-          id: nanoid(),
-        },
-      ],
-    }));
-  };
 
   removeContact = id => {
     this.setState(prev => ({

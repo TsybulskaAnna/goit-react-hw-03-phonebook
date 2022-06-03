@@ -15,7 +15,7 @@ export class FormContact extends Component {
     const name = e.target.name.value;
     const number = e.target.number.value;
     e.preventDefault();
-
+    //if (this.inputName(name)) return;
     this.props.addContact(name, number);
     this.resetForm();
   };
